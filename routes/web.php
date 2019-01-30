@@ -11,6 +11,11 @@
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
+
     return view('welcome');
-});
+});*/
+
+Route::get('/', 'ChavoController@index')->name('chavo.lists');
+
+Route::get('/cards', 'ChavoController@cards')->name('chavo.cards');

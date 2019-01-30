@@ -16,7 +16,7 @@ class CreateNicksTable extends Migration
         Schema::create('nicks', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->unsignedInteger('person_id');
+            $table->unsignedInteger('person_id')->nullable();
             $table->foreign('person_id')->references('id')->on('persons');
             $table->timestamps();
         });
