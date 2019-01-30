@@ -22,7 +22,6 @@ class CreatePersonsTable extends Migration
             $table->string('name');
             $table->string('image');
             $table->string('apartment');
-            $table->string('apartment_image')->nullable();
             $table->longText('description')->nullable();
             $table->timestamps();
         });

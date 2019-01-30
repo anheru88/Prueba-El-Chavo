@@ -44,8 +44,8 @@
                                 @endif
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-warning">Edit</button>
-                                        <button type="button" class="btn btn-sm btn-outline-danger">Delete</button>
+                                        <a class="btn btn-sm btn-outline-warning" href="{{ route('chavo.edit', $person->id) }}">Edit</a>
+                                        <button type="button" class="btn btn-sm btn-outline-danger btn-delete" data-id="{{ $person->id }}">Delete</button>
                                     </div>
                                 </div>
                             </div>
@@ -68,4 +68,8 @@
 
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    @include('partials.delete_script')
 @endsection

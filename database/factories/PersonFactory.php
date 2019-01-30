@@ -9,7 +9,6 @@ $factory->define(Person::class, function (Faker $faker) {
         'name' => $faker->name,
         'image' => $faker->imageUrl(),
         'apartment' => $faker->streetAddress,
-        'apartment_image' => $faker->image(),
         'description' => ''
     ];
 });

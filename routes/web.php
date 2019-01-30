@@ -17,5 +17,8 @@
 });*/
 
 Route::get('/', 'ChavoController@index')->name('chavo.lists');
-
 Route::get('/cards', 'ChavoController@cards')->name('chavo.cards');
+Route::get('/create', 'ChavoController@create')->name('chavo.create');
+Route::post('/store', 'ChavoController@store')->name('chavo.store');
+Route::get('/{id}/edit', 'ChavoController@edit')->name('chavo.edit');
+Route::get('delete/{id}', 'ChavoController@delete')->name('chavo.delete');

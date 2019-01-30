@@ -13,7 +13,6 @@ class Person extends Model
         'name',
         'image',
         'apartment',
-        'apartment_image',
         'description'
     ];
 
