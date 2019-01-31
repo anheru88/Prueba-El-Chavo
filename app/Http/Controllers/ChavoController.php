@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Nick;
 use App\Person;
-
-use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\Storage;
+use App\Traits\PersonDataTrait;
 use Request as Request2;
 
 class ChavoController extends Controller
 {
+    use PersonDataTrait;
+
     public function index()
     {
         list($sort, $persons) = $this->getDAta();
@@ -59,44 +58,20 @@ class ChavoController extends Controller
             ->with('person', $person);
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
         $person = Person::findOrFail($id);
 
         $nicks = $person->nicks;
 
-        foreach ($nicks as $nick){
+        foreach ($nicks as $nick) {
             $nick->delete();
         }
 
         $person->delete();
 
-        return redirect()->route('chavo.lists');
-    }
-
-    /**
-     * @return array
-     */
-    public function getDAta(): array
-    {
-        $sort = Request2::get('sort');
-
-        if ($sort != null) {
-            switch ($sort) {
-                case "name":
-                    $persons = Person::orderBy($sort)->paginate(9);
-                    break;
-                case "nickname":
-                    $persons = Person::with([
-                        'nicks' => function ($nicks) {
-                            $nicks->orderBy('name');
-                        }
-                    ])
-                        ->orderBy('name')->paginate(9);
-                    break;
-            }
-        } else {
-            $persons = Person::paginate(9);
-        }
-        return [$sort, $persons];
+        return response()->json([
+            'ok'
+        ]);
     }
 }

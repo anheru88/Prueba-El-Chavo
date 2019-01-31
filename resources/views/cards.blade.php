@@ -1,20 +1,5 @@
 @extends('layout')
 
-@section('style')
-    <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-        }
-
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
-    </style>
-@endsection
-
 @section('content')
     <div class="album py-5">
         <div class="container">
@@ -35,17 +20,14 @@
                             <img class="card-img-top" src="{{ $person->image }}" alt="{{ $person->name }}">
                             <div class="card-body">
                                 <h5 class="card-title">{{ $person->name }}</h5>
-                                @if(isset($nicks))
-                                    @if($person->nicks()->orderBy('name')->first() != null)
-                                        <p class="card-text">{{ $person->nicks()->orderBy('name')->first()->name }}</p>
-                                    @endif
-                                @else
-                                    <p class="card-text">{{ $person->nicks()->inRandomOrder()->first()->name }}</p>
-                                @endif
+                                <p class="card-text">{{ isset($person->nicks[0]->name) ? $person->nicks[0]->name : "" }}</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
-                                        <a class="btn btn-sm btn-outline-warning" href="{{ route('chavo.edit', $person->id) }}">Edit</a>
-                                        <button type="button" class="btn btn-sm btn-outline-danger btn-delete" data-id="{{ $person->id }}">Delete</button>
+                                        <a class="btn btn-sm btn-outline-warning"
+                                           href="{{ route('chavo.edit', $person->id) }}">Edit</a>
+                                        <button type="button" class="btn btn-sm btn-outline-danger btn-delete"
+                                                data-id="{{ $person->id }}">Delete
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -71,5 +53,5 @@
 @endsection
 
 @section('scripts')
-    @include('partials.delete_script')
+    <script src="{{ asset('js/delete_script.js') }}"></script>
 @endsection

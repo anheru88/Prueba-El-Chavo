@@ -31,15 +31,7 @@
                             <td><img class="img-fluid" src="{{ $person->image }}" alt="{{ $person->name }}"
                                      style="height: 100px"></td>
                             <td>{{ $person->name }}</td>
-                            <td>
-                                @if(isset($nicks))
-                                    @if($person->nicks()->orderBy('name')->first() != null)
-                                        <p class="card-text">{{ $person->nicks()->orderBy('name')->first()->name }}</p>
-                                    @endif
-                                @else
-                                    <p class="card-text">{{ $person->nicks()->inRandomOrder()->first()->name }}</p>
-                                @endif
-                            </td>
+                            <td>{{ isset($person->nicks[0]->name) ? $person->nicks[0]->name : "" }}</td>
                             <td>
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-sm btn-outline-warning">Edit</button>
@@ -78,5 +70,5 @@
 @endsection
 
 @section('scripts')
-    @include('partials.delete_script')
+    <script src="{{ asset('js/delete_script.js') }}"></script>
 @endsection
